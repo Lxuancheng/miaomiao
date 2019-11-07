@@ -43,7 +43,8 @@ export default {
   },
   watch: {
     message (newval) {
-      axios.get('/api/searchList?cityId=10&kw=' + newval)
+      let cityId = this.$store.state.city.id
+      axios.get('/api/searchList?cityId=' + cityId + '&kw=' + newval)
         .then(res => {
           if (res.data.msg === 'ok' && res.data.data.movies) {
             console.log(res.data)
