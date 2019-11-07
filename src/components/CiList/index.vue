@@ -1,5 +1,7 @@
 <template>
   <div class="cinema_body">
+    <Loading v-if="isLoading"/>
+    <Scroller v-else>
         <ul>
             <li v-for="item of cinemaList" :key="item.id">
                 <div>
@@ -31,6 +33,7 @@
                 </div>
             </li>
         </ul> -->
+    </Scroller>
     </div>
 </template>
 
@@ -39,15 +42,25 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      cinemaList: []
+      cinemaList: [],
+      isLoading: true,
+      preveCityId: -1
     }
   },
-  mounted () {
-    axios.get('/api/cinemaList?cityId=10')
+  activated () {
+    let cityId = this.$store.state.city.id
+    // console.log(cityId)
+    if (this.preveCityId === cityId) {
+      return
+    }
+    this.isLoding = true
+    axios.get('/api/cinemaList?cityId=' + cityId)
       .then(res => {
-        console.log(res.data.data.cinemas)
+        // console.log(res.data.data.cinemas)
         if (res.data.msg === 'ok') {
           this.cinemaList = res.data.data.cinemas
+          this.preveCityId = cityId
+          this.isLoading = false
         }
       })
   },
