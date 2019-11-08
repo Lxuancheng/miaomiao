@@ -5,9 +5,9 @@
         <ul>
             <li class="pullDown">{{pullDownMsg}}</li>
             <li v-for="item of moveList" :key="item.id">
-                <div class="pic_show" @tap='handleToDetail'><img :src='item.img | setwh("128.180")'></div>
+                <div class="pic_show" @tap='handleToDetail(item.id)'><img :src='item.img | setwh("128.180")'></div>
                 <div class="info_list">
-                    <h2>{{item.nm}}<img src='@/assets/maxs.png' v-if='item.version'></h2>
+                    <h2  @tap='handleToDetail(item.id)'>{{item.nm}}<img src='@/assets/maxs.png' v-if='item.version'></h2>
                     <p>观众评 <span class="grade">{{item.sc}}</span></p>
                     <p>主演: {{item.star}}</p>
                     <p>{{item.showInfo}}</p>
@@ -94,13 +94,14 @@ export default {
   },
   filters: {
     setwh: (url, arg) => {
-      //   console.log(url)
+      // console.log(url)
       return url.replace(/w\.h/, arg)
     }
   },
   methods: {
-    handleToDetail () {
-      console.log('hello')
+    handleToDetail (moveId) {
+      // console.log(moveId)
+      this.$router.push('/move/detail/1/' + moveId)
     },
     handleToScroll (pos) {
       if (pos.y > 30) {

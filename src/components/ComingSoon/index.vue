@@ -4,9 +4,9 @@
     <Scroller v-else>
         <ul>
              <li v-for="item of comingList" :key="item.id">
-                <div class="pic_show"><img :src='item.img | setwh("128.180")'></div>
+                <div class="pic_show" @tap='handleToDetail(item.id)'><img :src='item.img | setwh("128.180")'></div>
                 <div class="info_list">
-                    <h2>{{item.nm}}<img src='@/assets/maxs.png' v-if="item.version"></h2>
+                    <h2 @tap='handleToDetail(item.id)'>{{item.nm}}<img src='@/assets/maxs.png' v-if="item.version"></h2>
                     <p><span class="person">{{item.wish}}</span> 人想看</p>
                     <p>主演:{{item.star}}</p>
                     <p>{{item.rt}}</p>
@@ -61,6 +61,11 @@ export default {
   filters: {
     setwh: (url, arg) => {
       return url.replace(/w\.h/, arg)
+    }
+  },
+  methods: {
+    handleToDetail (moveId) {
+      this.$router.push('/move/detail/2/' + moveId)
     }
   }
 }

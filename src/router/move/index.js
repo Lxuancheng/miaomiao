@@ -21,6 +21,26 @@ export default {
     {
       path: 'city',
       component: () => import('@/components/City')
+    },
+    {
+      path: 'detail/1/:moveId',
+      components: {
+        default: () => import('@/components/NowPlaying'),
+        detail: () => import('@/views/Move/detail')
+      },
+      props: {
+        detail: true
+      }
+    },
+    {
+      path: 'detail/2/:moveId',
+      components: {
+        default: () => import('@/components/ComingSoon'),
+        detail: () => import('@/views/Move/detail')
+      },
+      props: {
+        detail: true
+      }
     }
   ]
 }

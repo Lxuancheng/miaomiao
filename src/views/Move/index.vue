@@ -20,6 +20,7 @@
          <router-view></router-view> <!--在电影页面还有城市/热映/将上映/搜索页面,所以将这些组件作为 -->
       </keep-alive>       <!-- 子路由嵌套到move路由中，在这里通过router-view来展示子路由-->
       </div>
+      <router-view name='detail'></router-view>
     </div>
 </template>
 
